@@ -367,10 +367,14 @@ section {
 
 /* Projects Section */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(300px, 1fr)) !important;
     gap: 30px;
     margin-top: 50px;
+    align-items: stretch;
+    justify-items: stretch;
+    grid-auto-rows: auto;
+    width: 100%;
 }
 
 .project-card {
@@ -380,6 +384,12 @@ section {
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 51, 255, 0.2);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 520px;
+    overflow: hidden;
+    width: 100%;
 }
 
 .project-card:hover {
@@ -390,9 +400,9 @@ section {
 
 .project-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
@@ -401,6 +411,7 @@ section {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    display: block;
 }
 
 .project-card:hover .project-image img {
@@ -417,6 +428,19 @@ section {
     margin-bottom: 20px;
     color: var(--text-light);
     font-size: 0.95rem;
+}
+
+.project-card .btn {
+    margin-top: 18px;
+}
+
+@media (max-width: 1100px) {
+    .projects-grid { grid-template-columns: repeat(2, minmax(280px, 1fr)) !important; }
+}
+
+@media (max-width: 768px) {
+    .projects-grid { grid-template-columns: 1fr !important; }
+    .project-card { min-height: auto; }
 }
 
 .project-tech {
@@ -1195,6 +1219,7 @@ section {
                     </div>
                     <a href="https://nqabs-built-ins-services-2hzg.vercel.app/" target="_blank" class="btn btn-primary">Live View</a>
                 </div>
+                <div class="project-card">
                     <div class="project-image">
                         <img src="https://i.postimg.cc/HkPYfzhL/Screenshot-498.png" alt="MR SUITS SA">
                     </div>
@@ -1718,4 +1743,15 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     document.querySelectorAll('.project-card, .cert-card, .about-text, .tech-stack, .contact-info, .contact-form').forEach(element => {
         element.style.opacity = '0';
-        element.
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+
+    window.addEventListener('scroll', animateOnScroll);
+    // Run once on load to reveal elements already in view
+    animateOnScroll();
+
+});
+</script>
+</body>
+</html>
